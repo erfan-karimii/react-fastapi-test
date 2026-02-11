@@ -8,6 +8,8 @@ app = FastAPI(title="Navigation API")
 class NavItem(BaseModel):
     name: str
     subnav: Optional[List[str]] = None
+    link: Optional[str] = None
+
 
 
 @app.get("/navigation", response_model=List[NavItem])
