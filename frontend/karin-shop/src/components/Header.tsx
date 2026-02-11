@@ -1,11 +1,47 @@
+import { useEffect , useState } from "react";
+
+type NavbarItem = {
+  name: string;
+  subnav?: string[];
+};
+
 export default function Header() {
-  let navbarData = [
-    {name:"صفحه اصلی",link:"/",subnav:null},
-    {name:"دسته بندی ها",link:"/about",subnav:["موبایل","لبتاپ"]},
-    {name:"فروشگاه",link:"/shop"},
-    {name:"وبلاگ",link:"/blog"},
-    {name: "منوی ساده",link:"/simple-menu",subnav:["درباره ما","سوالات متداول"]},
-  ]
+  const [navbarData, setNavigation] = useState<NavbarItem[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchNavigation = async () => {
+      try {
+        const response = await fetch("http://127.0.0.1:8000/navigation", {
+          method: "GET",
+          headers: {
+            "Accept": "application/json",
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+
+        const data = await response.json();
+        setNavigation(data);
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("Unknown error occurred");
+      }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchNavigation();
+  }, []);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
   return (
     <header className="header">
       {/* Desktop */}
@@ -314,8 +350,8 @@ export default function Header() {
                 { navbar.subnav &&
 
                 <ul className="solid-menu">
-                  {navbar.subnav.map((subNavName)=>(
-                    <li>
+                  {navbar.subnav.map((subNavName,idx)=>(
+                    <li key={idx}>
                       <a href="aboute-us.html">{subNavName}</a>
                     </li>
                   ))}
