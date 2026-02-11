@@ -1,9 +1,21 @@
-from fastapi import FastAPI
 from typing import List, Optional
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+import uvicorn
 
 app = FastAPI(title="Navigation API")
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",  # Vite
+        "http://127.0.0.1:5173",
+    ],
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_headers=["*"],
+)
 
 class NavItem(BaseModel):
     name: str
@@ -22,7 +34,6 @@ async def get_navigation():
         {"name": "منوی ساده", "subnav": ["درباره ما", "سوالات متداول"],"link":"/"},
     ]
 
-import uvicorn
 if __name__ == "__main__":
     uvicorn.run(
         "main:app",
