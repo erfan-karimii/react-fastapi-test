@@ -1,10 +1,10 @@
-import Header from "../components/Header"
+import Header from "../components/header/Header"
 
 export default function About() {
   return (
     <>
-    <Header/>
-    <p className="text-center mt-10">About Us page</p>
+      <Header />
+      <p className="text-center mt-10">About Us page</p>
     </>
   )
 }
