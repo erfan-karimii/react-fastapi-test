@@ -1,8 +1,10 @@
 import { useEffect , useState } from "react";
+import { Link } from "react-router";
 
 type NavbarItem = {
   name: string;
-  subnav?: string[];
+  link: string;
+  subnav?: NavbarItem[];
 };
 
 export default function Header() {
@@ -13,7 +15,7 @@ export default function Header() {
   useEffect(() => {
     const fetchNavigation = async () => {
       try {
-        const response = await fetch("http://127.0.0.1:8000/navigation", {
+        const response = await fetch("http://localhost:8001/navigation", {
           method: "GET",
           headers: {
             "Accept": "application/json",
@@ -338,7 +340,7 @@ export default function Header() {
           <ul className="flex items-center gap-x-8">
             { navbarData.map((navbar,idx)=>(
               <li className="menu-item group" key={idx}> 
-                <a href="main.html" className="menu-item_link cursor-pointer">
+                <Link to={navbar.link} className="menu-item_link cursor-pointer">
                   {navbar.name}
                   {
                   navbar.subnav &&
@@ -346,13 +348,13 @@ export default function Header() {
                     <use href="#chevron" />
                   </svg>
                   }
-                </a>
+                </Link>
                 { navbar.subnav &&
 
                 <ul className="solid-menu">
                   {navbar.subnav.map((subNavName,idx)=>(
                     <li key={idx}>
-                      <a href="aboute-us.html">{subNavName}</a>
+                      <Link to={subNavName.link}>{subNavName.name}</Link>
                     </li>
                   ))}
                 </ul>
