@@ -6,7 +6,6 @@ import About from "./pages/AboutUs"
 function App() {
 
   return (
-    
     <Routes>
       <Route path="/" element={<Index />} />
       <Route path="/about" element={<About />} />

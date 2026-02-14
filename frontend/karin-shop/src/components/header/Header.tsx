@@ -1,5 +1,6 @@
 import { useEffect , useState } from "react";
 import { Link } from "react-router";
+import { env } from "../../config/env";
 
 type NavbarItem = {
   name: string;
@@ -15,7 +16,7 @@ export default function Header() {
   useEffect(() => {
     const fetchNavigation = async () => {
       try {
-        const response = await fetch("http://localhost:8001/navigation", {
+        const response = await fetch(`${env.apiBaseUrl}/navigation`, {
           method: "GET",
           headers: {
             "Accept": "application/json",

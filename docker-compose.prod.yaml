@@ -1,0 +1,23 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: fastapi-backend
+    expose:
+      - "8000"
+    restart: always
+
+  frontend:
+    build:
+      context: ./frontend/karin-shop
+      dockerfile: Dockerfile.prod
+    container_name: frontend-nginx
+    volumes:
+      - ./default.conf:/etc/nginx/nginx.conf
+      - ./video.conf:/etc/nginx/sites-enabled/video.conf
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    restart: always
