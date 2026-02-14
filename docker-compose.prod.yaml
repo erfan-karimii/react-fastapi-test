@@ -10,7 +10,7 @@ services:
 
   frontend:
     build:
-      context: ./frontend/karin-shop
+      context: ./frontend
       dockerfile: Dockerfile.prod
     container_name: frontend-nginx
     volumes:

@@ -1,6 +1,10 @@
 import { useEffect , useState } from "react";
 import { Link } from "react-router";
+import ImageSlider from "./Slider";
 import { env } from "../../config/env";
+import image1 from "../../assets/images/slider/1.jpg";
+import image2 from "../../assets/images/slider/2.jpg";
+
 
 type NavbarItem = {
   name: string;
@@ -8,7 +12,11 @@ type NavbarItem = {
   subnav?: NavbarItem[];
 };
 
-export default function Header() {
+interface HeaderProps {
+  showSlider?: boolean;
+}
+
+export default function Header({ showSlider = false }: HeaderProps) {
   const [navbarData, setNavigation] = useState<NavbarItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -42,7 +50,18 @@ export default function Header() {
 
     fetchNavigation();
   }, []);
-
+  const slides = [
+    {
+      id: 1,
+      image: image1,
+      title: "جدیدترین گوشی های موبایل",
+    },
+    {
+      id: 2,
+      image: image2,
+      title: "لپ تاپ های گیمینگ",
+    },
+  ]
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
   return (
@@ -132,7 +151,7 @@ export default function Header() {
             </div>
           </div>
           {/* Logo */}
-          <a href="main.html" className="flex flex-col text-center ml-20">
+          <a href="#" className="flex flex-col text-center ml-20">
             <span className="font-MorabbaMedium text-4xl flex items-center">
               <span className="text-blue-500">کارین</span> شاپ
             </span>
@@ -446,6 +465,7 @@ export default function Header() {
             </div>
           </div>
         </div>
+      {showSlider && <ImageSlider slides={slides} />}
       </div>
     </header>
   )
