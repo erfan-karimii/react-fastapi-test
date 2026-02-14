@@ -2,7 +2,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
 
 import "swiper/css";
-import 'swiper/css/pagination';
+import "swiper/css/pagination";
 
 type Slide = {
   id: number;
@@ -18,7 +18,6 @@ interface ImageSliderProps {
 export default function ImageSlider({ slides }: ImageSliderProps) {
   return (
     <Swiper
-
       pagination={{
         dynamicBullets: true,
       }}
