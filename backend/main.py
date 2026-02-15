@@ -33,7 +33,7 @@ async def get_navigation():
     return [
         {"name": "صفحه اصلی", "subnav": None,"link":"/"},
         {"name": "دسته بندی ها", "subnav": None,"link":"/about"},
-        {"name": "فروشگاه", "subnav": None,"link":"/"},
+        {"name": "فروشگاه", "subnav": None,"link":"/shop"},
         {"name": "وبلاگ","link":"/"},
         {"name": "منوی ساده", "subnav": [{"name": "صفحه اصلی","link":"/","subnav":[{"name": "وبلاگ","link":"/"}]},{"name": "وبلاگ","link":"/",}],"link":"/"},
     ]
