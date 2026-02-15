@@ -1,0 +1,30 @@
+.footer-container{
+    /* background-color: rgb(24 24 27); */
+    background-color: rgb(17 24 39 );
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 30px;
+    color: white;
+}
+.top-section, .bottom-section {
+    display: flex;
+}
+
+
+.top-section{
+    justify-content: space-between;
+}
+
+.mini-about{
+    width: 35%;
+}
+
+.bottom-section {
+    background-color: rgb(3 7 18);
+    justify-content: space-between;
+    padding: 30px;
+    border-radius: inherit;
+}
+
