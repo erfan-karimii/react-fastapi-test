@@ -1,6 +1,6 @@
 import { useEffect , useState } from "react";
 import { Link } from "react-router";
-import ImageSlider from "./Slider";
+import ImageSlider from "./ImageSlider";
 import { env } from "../../config/env";
 import image1 from "../../assets/images/slider/1.jpg";
 import image2 from "../../assets/images/slider/2.jpg";
