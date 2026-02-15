@@ -13,3 +13,4 @@ class Product(BaseModel):
     price: float
     description: Optional[str] = None
     is_amazing: Optional[bool] = False
+    image_url: Optional[str] = None
