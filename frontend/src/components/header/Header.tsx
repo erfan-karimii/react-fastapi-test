@@ -1,7 +1,9 @@
 import { useEffect , useState } from "react";
 import { Link } from "react-router";
-import ImageSlider from "./ImageSlider";
+import { useLocation } from "react-router-dom";
 import { env } from "../../config/env";
+
+import ImageSlider from "./ImageSlider";
 import image1 from "../../assets/images/slider/1.jpg";
 import image2 from "../../assets/images/slider/2.jpg";
 
@@ -12,14 +14,12 @@ type NavbarItem = {
   subnav?: NavbarItem[];
 };
 
-interface HeaderProps {
-  showSlider?: boolean;
-}
 
-export default function Header({ showSlider = false }: HeaderProps) {
+export default function Header() {
   const [navbarData, setNavigation] = useState<NavbarItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const showSlider = useLocation().pathname === "/" ? true : false;
 
   useEffect(() => {
     const fetchNavigation = async () => {

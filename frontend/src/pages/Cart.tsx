@@ -1,11 +1,10 @@
-import Header from "../components/header/Header"
-import Footer from "../components/footer/Footer"
 import Breadcrumb from "../components/filters/Breadcrumb"
 import ProductShoppingCard from "../components/productcard/ProductShoppingCard"
+
+
 export default function Cart() {
   return (
     <>
-        <Header />
         <div className="container mt-5">
             <Breadcrumb />
             <section className="flex flex-col lg:flex-row justify-between items-start gap-4 child:rounded-lg child:bg-white child:dark:bg-gray-800 child:shadow child:p-4 mt-5">
@@ -65,7 +64,6 @@ export default function Cart() {
 
             </section>
         </div>
-        <Footer />
     </>
   )
 }

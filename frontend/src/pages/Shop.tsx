@@ -1,5 +1,3 @@
-import Header from "../components/header/Header"
-import Footer from "../components/footer/Footer"
 import Breadcrumb from "../components/filters/Breadcrumb"
 import SideFilter from "../components/filters/SideFilter"
 import TopBoxFilter from "../components/filters/TopBoxFilter"
@@ -9,7 +7,6 @@ import Pagination from "../components/filters/Pagination"
 function Shop() {
   return (
     <>
-      <Header />
       <div className="container mt-5">
         <Breadcrumb />
         <div className="flex flex-col lg:flex-row gap-4 mt-5 mx-2 md:mx-0">
@@ -36,7 +33,6 @@ function Shop() {
 
       </div>
 
-      <Footer />
     </>
   )
 }

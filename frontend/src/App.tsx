@@ -4,16 +4,21 @@ import Index from "./pages/index"
 import About from "./pages/AboutUs"
 import Shop from "./pages/Shop"
 import Cart from "./pages/Cart";
-
+import Header from "./components/header/Header";
+import Footer from "./components/footer/Footer";
 function App() {
 
   return (
-    <Routes>
-      <Route path="/" element={<Index />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/shop" element={<Shop />} />
-      <Route path="/cart" element={<Cart />} />
-    </Routes>
+    <>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/shop" element={<Shop />} />
+        <Route path="/cart" element={<Cart />} />
+      </Routes>
+      <Footer />
+    </>
   )
 }
 
