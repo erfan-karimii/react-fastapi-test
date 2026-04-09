@@ -34,7 +34,7 @@ export default function Cart() {
                     {/* PRICE */}
                     <ul className="child:flex child:items-center child:justify-between space-y-8">
                         <li>
-                        <p>قیمت کالاها(۱)</p>
+                        <p>قیمت کالاها(2)</p>
                         <p className="flex gap-x-1 text-gray-600 dark:text-gray-300 ">
                             ۱۲۵,۰۰۰,۰۰۰ <span className="hidden xl:flex">تومان</span>
                         </p>

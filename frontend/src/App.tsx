@@ -1,14 +1,17 @@
 import "./assets/styles/app.css"
 import { Routes, Route } from "react-router-dom";
+
+import Header from "./components/header/Header";
+import Footer from "./components/footer/Footer";
+
 import Index from "./pages/index"
 import About from "./pages/AboutUs"
 import Shop from "./pages/Shop"
 import Cart from "./pages/Cart";
-import Header from "./components/header/Header";
-import Footer from "./components/footer/Footer";
 import Single from "./pages/Single";
-function App() {
 
+
+function App() {
   return (
     <>
       <Header />

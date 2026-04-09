@@ -47,9 +47,7 @@ export default function ImageSlider({ slides }: ImageSliderProps) {
               </div>
             )}
           </div>
-        </SwiperSlide>
-        
-        
+        </SwiperSlide>        
       ))}
     </Swiper>
   );
