@@ -1,5 +1,5 @@
 import "./assets/styles/app.css"
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route , ScrollRestoration } from "react-router-dom";
 
 import { Header, Footer } from "./components/";
 
@@ -17,6 +17,7 @@ function App() {
         <Route path="/single/:id" element={<Single />} />
         <Route path="*" element={<Page404 />} />
       </Routes>
+      <ScrollRestoration />
       <Footer />
     </>
   )
