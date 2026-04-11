@@ -46,7 +46,7 @@ async def get_navigation():
         {"name": "صفحه اصلی", "subnav": None,"link":"/"},
         {"name": "فروشگاه", "subnav": None,"link":"/shop"},
         {"name": "کارت", "subnav": None,"link":"/cart"},
-        {"name": "تک","link":"/single"},
+        {"name": "تک","link":"/single/12"},
         {"name": "منوی ساده", "subnav": [{"name": "صفحه اصلی","link":"/","subnav":[{"name": "وبلاگ","link":"/"}]},{"name": "وبلاگ","link":"/",}],"link":"/"},
     ]
 

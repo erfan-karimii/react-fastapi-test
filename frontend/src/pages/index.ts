@@ -1,4 +1,4 @@
-export {default as Index}  from "./Landing";
+export {default as Index}  from "./Home";
 export {default as About}  from "./AboutUs";
 export {default as Shop}  from "./Shop";
 export {default as Cart}  from "./Cart";

@@ -14,7 +14,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/single" element={<Single />} />
+        <Route path="/single/:id" element={<Single />} />
         <Route path="*" element={<Page404 />} />
       </Routes>
       <Footer />

@@ -7,6 +7,7 @@ import { env } from "../../config/env";
 import AmazingImg from '../../assets/images/slider/Amazings.svg'
 
 import "./slider.css"
+import { Link } from 'react-router';
 
 interface Products {
     id: number;
@@ -78,9 +79,9 @@ function AmazingSlider() {
 
                     <img src={product.image_url} alt={product.name} className="w-48 h-28  rounded-lg" />
                     <div className="space-y-2">
-                        <a href="#" className="w-36 block" style={{fontSize: 'smaller'}}>
+                        <Link to={`/single/${product.id}`} className="w-36 block" style={{fontSize: 'smaller'}}>
                             {product.name}
-                        </a>
+                        </Link>
                         {/* Rate and Price */}
                         <div className="w-24">
                             {/* Price */}

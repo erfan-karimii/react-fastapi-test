@@ -1,3 +1,4 @@
+import { useParams } from "react-router"
 import Breadcrumb from "../components/filters/Breadcrumb"
 import SingleSlider from "../components/products-slider/SingleSlider"
 import img1 from "../assets/images/products/11.png"
@@ -7,7 +8,9 @@ import img4 from "../assets/images/products/14.webp"
 
 
 function Single() {
-  return (
+    const params = useParams() 
+    console.log(params.id)
+    return (
     <div className="container mt-5">
         <Breadcrumb />
         <section className="mt-5 flex flex-col lg:flex-row items-start gap-4 child:rounded-lg child:bg-white child:dark:bg-gray-800 child:shadow child:p-4">
@@ -217,7 +220,7 @@ function Single() {
         </section>
 
     </div>
-  )
+    )
 }
 
 export default Single
