@@ -1,15 +1,9 @@
 import "./assets/styles/app.css"
 import { Routes, Route } from "react-router-dom";
 
-import Header from "./components/header/Header";
-import Footer from "./components/footer/Footer";
+import { Header, Footer } from "./components/";
 
-import Index from "./pages/index"
-import About from "./pages/AboutUs"
-import Shop from "./pages/Shop"
-import Cart from "./pages/Cart";
-import Single from "./pages/Single";
-
+import { Index, About, Shop, Cart, Single } from "./pages/"
 
 function App() {
   return (
