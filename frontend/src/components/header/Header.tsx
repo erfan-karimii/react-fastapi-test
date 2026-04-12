@@ -13,8 +13,8 @@ type NavbarItem = {
 type SliderItem = {
   id:number;
   image:string;
-  title:string
-}
+  title:string;
+};
 
 export default function Header() {
   const showSlider = useLocation().pathname === "/" ? true : false;
@@ -29,7 +29,6 @@ export default function Header() {
   }
   return (
     <header className="header">
-      {/* Desktop */}
       <div className="container mt-5 hidden flex-col gap-y-6 lg:flex">
         {/* TOPBAR */}
         <div className="flex-between">
@@ -41,76 +40,6 @@ export default function Header() {
                 <use href="#search" />
               </svg>
               <input placeholder="جستجو در کارین..." type="text" />
-            </div>
-            {/* Search Modal */}
-            <div className="search-modal space-y-4">
-              {/* Result */}
-              <div>
-                <span className="flex items-center text-sm gap-x-1 text-gray-600 dark:text-gray-200">
-                  <p>
-                    نتیجه جستجو :{" "}
-                    <span className="font-DanaMedium text-blue-400">iphone</span>
-                  </p>
-                </span>
-                <ul className="pt-4 text-gray-500 dark:text-gray-300 flex flex-col gap-y-4 child:flex-between child:cursor-pointer">
-                  <li>
-                    <a href="#" className="flex items-center gap-x-2">
-                      <svg className="size-5">
-                        <use href="#search" />
-                      </svg>
-                      آیفون 14
-                    </a>
-                    <svg className="size-4">
-                      <use href="#arrow-up-right" />
-                    </svg>
-                  </li>
-                  <li>
-                    <a href="#" className="flex items-center gap-x-2">
-                      <svg className="size-5">
-                        <use href="#search" />
-                      </svg>
-                      قاب آیفون
-                    </a>
-                    <svg className="size-4">
-                      <use href="#arrow-up-right" />
-                    </svg>
-                  </li>
-                  <li>
-                    <a href="#" className="flex items-center gap-x-2">
-                      <svg className="size-5">
-                        <use href="#search" />
-                      </svg>
-                      کاور ایفون 16
-                    </a>
-                    <svg className="size-4">
-                      <use href="#arrow-up-right" />
-                    </svg>
-                  </li>
-                </ul>
-              </div>
-              {/* Trend */}
-              <div className="pt-4">
-                <span className="flex items-center gap-x-1 text-sm text-gray-500 dark:text-gray-200">
-                  <svg className="size-4">
-                    <use href="#fire" />
-                  </svg>
-                  <p>جستجو های پرطرفدار :</p>
-                </span>
-                <ul className="w-full flex items-center gap-1.5 mt-3 child:search-modal-list-item">
-                  <li>
-                    <a href="#">#آیفون</a>
-                  </li>
-                  <li>
-                    <a href="#">#لپ تاپ</a>
-                  </li>
-                  <li>
-                    <a href="#">#هدفون</a>
-                  </li>
-                  <li>
-                    <a href="#">#هلدر</a>
-                  </li>
-                </ul>
-              </div>
             </div>
           </div>
           {/* Logo */}
@@ -199,122 +128,6 @@ export default function Header() {
                 </span>
               </span>
             </button>
-            {/* Cart */}
-            <div className="cart ">
-              {/* HEADER */}
-              <div className="flex items-center justify-between pb-2 border-b-2 border-gray-200 dark:border-gray-600 text-gray-800 dark:text-gray-300">
-                <h2 className="font-DanaMedium text-lg">
-                  سبد خرید{" "}
-                  <span className="text-sm text-gray-400 font-Dana">(2 مورد)</span>
-                </h2>
-                <svg className="size-5 cursor-pointer close-cart mb-.5">
-                  <use href="#x-mark" />
-                </svg>
-              </div>
-              {/* MAIN */}
-              <div className="flex flex-col divide-y-2 divide-gray-200 dark:divide-gray-600 my-4">
-                {/* CART ITEM */}
-                <div className="grid grid-cols-12 gap-x-2 w-full py-4 cursor-pointer">
-                  {/* img */}
-                  <div className="col-span-4 w-24 h-20">
-                    <img
-                      src="images/products/5.webp"
-                      className="rounded-lg"
-                      alt="product"
-                    />
-                  </div>
-                  {/* detail */}
-                  <div className="col-span-8 flex flex-col justify-between">
-                    <h2 className="font-DanaMedium line-clamp-2">
-                      گوشی موبایل اپل مدل iPhone 13 CH دو سیم‌ کارت ظرفیت 256
-                      گیگابایت و رم 4 گیگابایت - نات اکتیو
-                    </h2>
-                    <div className="flex items-center justify-between gap-x-2 mt-2">
-                      <button className="w-20 flex items-center justify-between gap-x-1 rounded-lg border border-gray-200 dark:border-white/20 py-1 px-2">
-                        <svg className="size-4 increment text-green-600">
-                          <use href="#plus" />
-                        </svg>
-                        <input
-                          type="number"
-                          name="customInput"
-                          id="customInput"
-                          min={0}
-                          max={20}
-                          defaultValue={2}
-                          className="custom-input w-4 mr-2 text-sm"
-                        />
-                        <svg className="size-4 decrement text-red-500">
-                          <use href="#minus" />
-                        </svg>
-                      </button>
-                      <p className="text-lg text-blue-500 dark:text-blue-400 font-DanaMedium">
-                        1,130,000
-                        <span className="font-Dana text-sm">تومان</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                {/* CART ITEM */}
-                <div className="grid grid-cols-12 gap-x-2 w-full py-4 cursor-pointer">
-                  {/* img */}
-                  <div className="col-span-4 w-24 h-20">
-                    <img
-                      src="images/products/1.png"
-                      className="rounded-lg"
-                      alt="product"
-                    />
-                  </div>
-                  {/* detail */}
-                  <div className="col-span-8 flex flex-col justify-between">
-                    <h2 className="font-DanaMedium line-clamp-2">
-                      گوشی موبایل اپل مدل iPhone 13 CH دو سیم‌ کارت ظرفیت 256
-                      گیگابایت و رم 4 گیگابایت - نات اکتیو
-                    </h2>
-                    <div className="flex items-center justify-between gap-x-2 mt-2">
-                      <button className="w-20 flex items-center justify-between gap-x-1 rounded-lg border border-gray-200 dark:border-white/20 py-1 px-2">
-                        <svg className="size-4 increment text-green-600">
-                          <use href="#plus" />
-                        </svg>
-                        <input
-                          type="number"
-                          name="customInput"
-                          id="customInput"
-                          min={0}
-                          max={20}
-                          defaultValue={2}
-                          className="custom-input w-4 mr-2 text-sm"
-                        />
-                        <svg className="size-4 decrement text-red-500">
-                          <use href="#minus" />
-                        </svg>
-                      </button>
-                      <p className="text-lg text-blue-500 dark:text-blue-400 font-DanaMedium">
-                        1,130,000
-                        <span className="font-Dana text-sm">تومان</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {/* FOOTER */}
-              <div className="w-[90%] fixed bottom-2 flex items-center justify-between border-t-2 border-gray-200 dark:border-gray-600 pt-4">
-                <div>
-                  <p className="text-gray-500 dark:text-gray-300 text-sm">
-                    مبلغ قابل پرداخت :
-                  </p>
-                  <p className="text-lg text-blue-500 dark:text-blue-400 font-DanaDemiBold">
-                    1,130,000
-                    <span className="font-Dana text-sm">تومان</span>
-                  </p>
-                </div>
-                <a
-                  href="shopping-cart.html"
-                  className="py-2 px-4 bg-blue-600 flex-center hover:bg-blue-700 transition-all rounded-lg text-gray-200"
-                >
-                  ثبت سفارش
-                </a>
-              </div>
-            </div>
           </div>
         </div>
         {/* NAVBAR */}
@@ -346,87 +159,6 @@ export default function Header() {
             ))
             }
           </ul>
-          {/* Addres */}
-          <div className="relative">
-            <button className="flex items-center gap-x-1 citylist-open">
-              <svg className="size-6">
-                <use href="#map" />
-              </svg>
-              <p>آدرس خود را انتخاب کنید</p>
-            </button>
-            <div className="citylist-menu z-30">
-              {/* Search city */}
-              <button className="flex bg-gray-200 dark:bg-gray-700 gap-x-1 w-full items-center p-2 rounded-lg">
-                <svg className="size-6 text-gray-400">
-                  <use href="#search" />
-                </svg>
-                <input
-                  type="text"
-                  className="w-full placeholder:text-gray-400"
-                  placeholder="جستجوی شهر..."
-                />
-              </button>
-              <h2 className="my-3 pr-1.5 font-DanaMedium">شهرهای پرتکرار :</h2>
-              {/* City list */}
-              <ul className="city-list">
-                <li>
-                  <a href="#">
-                    <svg className="size-5">
-                      <use href="#map" />
-                    </svg>
-                    تهران
-                  </a>
-                  <svg className="size-4 rotate-90">
-                    <use href="#chevron" />
-                  </svg>
-                </li>
-                <li>
-                  <a href="#">
-                    <svg className="size-5">
-                      <use href="#map" />
-                    </svg>
-                    اصفهان
-                  </a>
-                  <svg className="size-4 rotate-90">
-                    <use href="#chevron" />
-                  </svg>
-                </li>
-                <li>
-                  <a href="#">
-                    <svg className="size-5">
-                      <use href="#map" />
-                    </svg>
-                    مشهد
-                  </a>
-                  <svg className="size-4 rotate-90">
-                    <use href="#chevron" />
-                  </svg>
-                </li>
-                <li>
-                  <a href="#">
-                    <svg className="size-5">
-                      <use href="#map" />
-                    </svg>
-                    شیراز
-                  </a>
-                  <svg className="size-4 rotate-90">
-                    <use href="#chevron" />
-                  </svg>
-                </li>
-                <li>
-                  <a href="#">
-                    <svg className="size-5">
-                      <use href="#map" />
-                    </svg>
-                    تبریز
-                  </a>
-                  <svg className="size-4 rotate-90">
-                    <use href="#chevron" />
-                  </svg>
-                </li>
-              </ul>
-            </div>
-          </div>
         </div>
       {showSlider && <ImageSlider slides={slides} />}
       </div>
