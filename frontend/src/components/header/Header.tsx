@@ -1,12 +1,8 @@
-import { useEffect , useState } from "react";
 import { Link } from "react-router";
 import { useLocation } from "react-router-dom";
-import { env } from "../../config/env";
+import useFetch from "../../hooks/useFetch.ts"
 
 import ImageSlider from "./ImageSlider";
-import image1 from "../../assets/images/slider/1.jpg";
-import image2 from "../../assets/images/slider/2.jpg";
-
 
 type NavbarItem = {
   name: string;
@@ -14,56 +10,23 @@ type NavbarItem = {
   subnav?: NavbarItem[];
 };
 
+type SliderItem = {
+  id:number;
+  image:string;
+  title:string
+}
 
 export default function Header() {
-  const [navbarData, setNavigation] = useState<NavbarItem[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
   const showSlider = useLocation().pathname === "/" ? true : false;
 
-  useEffect(() => {
-    const fetchNavigation = async () => {
-      try {
-        const response = await fetch(`${env.apiBaseUrl}/navigation`, {
-          method: "GET",
-          headers: {
-            "Accept": "application/json",
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error(`HTTP ${response.status}`);
-        }
-
-        const data = await response.json();
-        setNavigation(data);
-      } catch (err: unknown) {
-        if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError("Unknown error occurred");
-      }
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchNavigation();
-  }, []);
-  const slides = [
-    {
-      id: 1,
-      image: image1,
-      title: "جدیدترین گوشی های موبایل",
-    },
-    {
-      id: 2,
-      image: image2,
-      title: "لپ تاپ های گیمینگ",
-    },
-  ]
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  const [navigation,navigationError] = useFetch<NavbarItem>("/navigation")
+  const [slides,slidesError] = useFetch<SliderItem>("/slides")
+  if (navigationError){
+    return "header not loaded"
+  }
+  if (slidesError){
+    return "slides not loaded"
+  }
   return (
     <header className="header">
       {/* Desktop */}
@@ -358,7 +321,7 @@ export default function Header() {
         <div className="relative flex-between h-16 bg-gray-900 dark:bg-gray-800 rounded-full text-gray-200 px-10">
           {/* MENU */}
           <ul className="flex items-center gap-x-8">
-            { navbarData.map((navbar,idx)=>(
+            { navigation.map((navbar,idx)=>(
               <li className="menu-item group" key={idx}> 
                 <Link to={navbar.link} className="menu-item_link cursor-pointer">
                   {navbar.name}

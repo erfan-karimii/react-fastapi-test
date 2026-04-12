@@ -1,12 +1,14 @@
 from typing import List
 from contextlib import asynccontextmanager
 from time import sleep
+from fastapi_swagger import patch_fastapi
+
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
-from schemas import NavItems, Product
+from schemas import NavItems, Product , Slide
 from utils import initial_db
 
 
@@ -18,8 +20,8 @@ async def lifespan(app: FastAPI):
     yield
     db.clear()
 
-app = FastAPI(title="test ecommerce API",lifespan=lifespan)
-
+app = FastAPI(docs_url=None,swagger_ui_oauth2_redirect_url=None,title="test ecommerce API",lifespan=lifespan)
+patch_fastapi(app,docs_url="/docs")
 
 app.add_middleware(
     CORSMiddleware,
@@ -58,3 +60,19 @@ async def get_amazing_product_list():
 @app.get("/products", response_model=List[Product])
 async def get_product_list():
     return db
+
+@app.get("/slides", response_model=List[Slide])
+async def get_product_list():
+    slides = [
+        {
+            "id": 1,
+            "image": "http://localhost:8000/media/products/1.jpg",
+            "title": "جدیدترین گوشی های موبایل",
+        },
+        {
+            "id": 2,
+            "image": "http://localhost:8000/media/products/2.jpg",
+            "title": "لپ تاپ های گیمینگ",
+        },
+    ]
+    return slides

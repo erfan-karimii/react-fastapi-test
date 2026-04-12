@@ -14,3 +14,8 @@ class Product(BaseModel):
     description: Optional[str] = None
     is_amazing: Optional[bool] = False
     image_url: Optional[str] = None
+
+class Slide(BaseModel):
+    id:int
+    image: str
+    title: str
