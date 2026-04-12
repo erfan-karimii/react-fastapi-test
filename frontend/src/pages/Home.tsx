@@ -1,4 +1,4 @@
-import AmazingSlider from "../components/products-slider/AmazingSlider"
+import AmazingSlider from "../components/slider/AmazingSlider"
 
 import "swiper/css";
 import "swiper/css/pagination";
