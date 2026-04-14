@@ -4,7 +4,7 @@ from time import sleep
 from fastapi_swagger import patch_fastapi
 
 
-from fastapi import FastAPI
+from fastapi import FastAPI , HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
@@ -60,6 +60,15 @@ async def get_amazing_product_list():
 @app.get("/products", response_model=List[Product])
 async def get_product_list():
     return db
+
+@app.get("/product/{product_id}", responses={404:{"detail":"product not found"}},response_model=Product)
+async def get_product_detail(product_id:int):
+    for product in db:
+        if product.id == product_id:
+            return product
+    else:
+        raise HTTPException(status_code=404, detail=f"product not found")
+
 
 @app.get("/slides", response_model=List[Slide])
 async def get_product_list():

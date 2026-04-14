@@ -218,7 +218,6 @@ function Single() {
                     </div>
                 </div>
             </section>
-
         </div>
     )
 }

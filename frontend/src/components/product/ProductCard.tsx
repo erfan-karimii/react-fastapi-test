@@ -1,3 +1,4 @@
+import { Link } from "react-router"
 import img1 from "../../assets/images/products/1.png"
 import img2 from "../../assets/images/products/2.png"
 
@@ -36,7 +37,7 @@ function ProductCard() {
         <span className="product-card_badge">70% تخفیف‌{/*س*/}</span>
       </div>
       {/* product img */}
-      <a href="product-details.html">
+      <Link to={`/single/1`}>
         <img
           className="product-card_img group-hover:opacity-0 absolute"
           src={img1}
@@ -47,12 +48,12 @@ function ProductCard() {
           src={img2}
           alt=""
         />
-      </a>
+      </Link>
       {/*  product footer */}
       <div className="space-y-2">
-        <a href="product-details.html" className="product-card_link">
+        <Link to={`/single/1`} className="product-card_link">
           لپ تاپ 15.6 اینچی ایسوس مدل Vivobook15 X515MA-BR001-Celeron N4020-8GB DDR4
-        </a>
+        </Link>
         {/* Rate and Price */}
         <div className="product-card_price-wrapper">
           {/* RATE */}
