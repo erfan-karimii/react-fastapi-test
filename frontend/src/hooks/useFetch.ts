@@ -7,7 +7,7 @@ type UseFetchReturn<T> = [
   error: boolean
 ]
 
-function useFetch<T>(apiPath: string):UseFetchReturn<T>{
+export function useFetch<T>(apiPath: string):UseFetchReturn<T>{
   const [data, setData] = useState<T|null>(null);
   const [error, setError] = useState<boolean>(false);
   const url = `${env.apiBaseUrl}${apiPath}`;
@@ -40,5 +40,3 @@ function useFetch<T>(apiPath: string):UseFetchReturn<T>{
   }, [url]);
   return [data,error];
 };
-
-export default useFetch

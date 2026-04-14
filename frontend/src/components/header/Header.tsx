@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import { useLocation } from "react-router-dom";
-import useFetch from "../../hooks/useFetch.ts"
+import { useFetch } from "../../hooks/useFetch.ts"
 
 import ImageSlider from "./ImageSlider";
 

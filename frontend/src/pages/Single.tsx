@@ -1,6 +1,7 @@
 import { useParams } from "react-router"
 import { useNavigate } from "react-router-dom";
-import useFetch from "../hooks/useFetch"
+import { useCart } from "../context/CartContext";
+import {useFetch} from "../hooks/useFetch"
 import type { Product } from "../components/product/type";
 
 import Breadcrumb from "../components/filters/Breadcrumb"
@@ -14,8 +15,9 @@ import img4 from "../assets/images/products/14.webp"
 
 function Single() {
     const navigate = useNavigate();
+    const { addItem , cart } = useCart();
     const params = useParams()
-
+    console.log(cart)
     const [product, productError] = useFetch<Product>(`product/${params.id}`)
     if (productError) {
         navigate("/404", { replace: true });
@@ -215,7 +217,14 @@ function Single() {
                             <p>🔥 ۱۰۰۰+ فروش در هفته گذشته</p>
                         </div>
                     </div>
-                    <button className="w-full flex items-center gap-x-1 justify-center bg-blue-500 text-white hover:bg-blue-600 transition-all rounded-lg shadow py-2">
+                    <button 
+                        className="w-full flex items-center gap-x-1 justify-center bg-blue-500 text-white hover:bg-blue-600 transition-all rounded-lg shadow py-2"
+                        onClick={() => addItem({
+                            id: product.id,
+                            title: product.name,
+                            price: product.price,
+                        })}
+                    >
                         افزودن به سبد
                         <svg className="w-5 h-5">
                             <use href="#shopping-bag" />
