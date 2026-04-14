@@ -15,6 +15,7 @@ function App() {
         <Route path="/shop" element={<Shop />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/single/:id" element={<Single />} />
+        <Route path="/404" element={<Page404 />} />
         <Route path="*" element={<Page404 />} />
       </Routes>
       <ScrollRestoration />

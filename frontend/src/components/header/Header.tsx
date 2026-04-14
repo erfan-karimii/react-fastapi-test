@@ -19,14 +19,18 @@ type SliderItem = {
 export default function Header() {
   const showSlider = useLocation().pathname === "/" ? true : false;
 
-  const [navigation,navigationError] = useFetch<NavbarItem>("/navigation")
-  const [slides,slidesError] = useFetch<SliderItem>("/slides")
+  const [navigation,navigationError] = useFetch<NavbarItem[]>("/navigation")
+  const [slidesRaw,slidesError] = useFetch<SliderItem[]>("/slides")
+
   if (navigationError){
     return "header not loaded"
   }
+  if (!navigation) return null;
+  
   if (slidesError){
     return "slides not loaded"
   }
+  const slides = slidesRaw ?? []
   return (
     <header className="header">
       <div className="container mt-5 hidden flex-col gap-y-6 lg:flex">

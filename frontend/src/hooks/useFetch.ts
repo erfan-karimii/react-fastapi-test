@@ -3,12 +3,12 @@ import { env } from "../config/env";
 
 
 type UseFetchReturn<T> = [
-  data: T[],
+  data: T|null,
   error: boolean
 ]
 
 function useFetch<T>(apiPath: string):UseFetchReturn<T>{
-  const [data, setData] = useState<T[]>([]);
+  const [data, setData] = useState<T|null>(null);
   const [error, setError] = useState<boolean>(false);
   const url = `${env.apiBaseUrl}${apiPath}`;
 
