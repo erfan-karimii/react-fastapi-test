@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import { useFetch } from "../../hooks/useFetch.ts"
 
 import ImageSlider from "./ImageSlider";
+import { useCart } from "../../context/CartContext.tsx";
 
 type NavbarItem = {
   name: string;
@@ -18,6 +19,7 @@ type SliderItem = {
 
 export default function Header() {
   const showSlider = useLocation().pathname === "/" ? true : false;
+  const {cart} = useCart()
 
   const [navigation,navigationError] = useFetch<NavbarItem[]>("/navigation")
   const [slidesRaw,slidesError] = useFetch<SliderItem[]>("/slides")
@@ -126,10 +128,12 @@ export default function Header() {
                 <use href="#shopping-bag" />
               </svg>
               <span className="absolute -top-1 -right-1 flex h-4 w-4">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-600 opacity-75" />
+                <span className={`absolute inline-flex h-full w-full rounded-full opacity-75 ${cart.length && "animate-ping bg-red-600"}`} />
+                {cart.length && 
                 <span className="relative inline-flex rounded-full h-4 w-4 bg-red-500 text-xs pt-1 flex-center text-white">
-                  2
+                  {cart.length}
                 </span>
+                }
               </span>
             </button>
           </div>

@@ -15,9 +15,9 @@ import img4 from "../assets/images/products/14.webp"
 
 function Single() {
     const navigate = useNavigate();
-    const { addItem , cart } = useCart();
+    const { addItem } = useCart();
     const params = useParams()
-    console.log(cart)
+
     const [product, productError] = useFetch<Product>(`product/${params.id}`)
     if (productError) {
         navigate("/404", { replace: true });
@@ -219,11 +219,12 @@ function Single() {
                     </div>
                     <button 
                         className="w-full flex items-center gap-x-1 justify-center bg-blue-500 text-white hover:bg-blue-600 transition-all rounded-lg shadow py-2"
-                        onClick={() => addItem({
+                        onClick={() => (addItem({
                             id: product.id,
+                            image: product.image_url?product.image_url:"",
                             title: product.name,
                             price: product.price,
-                        })}
+                        }), navigate("/cart", { replace: true }))}
                     >
                         افزودن به سبد
                         <svg className="w-5 h-5">
