@@ -1,6 +1,11 @@
 import { useParams } from "react-router"
+import { useNavigate } from "react-router-dom";
+import useFetch from "../hooks/useFetch"
+import type { Product } from "../components/product/type";
+
 import Breadcrumb from "../components/filters/Breadcrumb"
 import SingleSlider from "../components/slider/SingleSlider"
+
 import img1 from "../assets/images/products/11.png"
 import img2 from "../assets/images/products/12.webp"
 import img3 from "../assets/images/products/13.webp"
@@ -8,19 +13,27 @@ import img4 from "../assets/images/products/14.webp"
 
 
 function Single() {
+    const navigate = useNavigate();
     const params = useParams()
-    console.log(params.id)
+
+    const [product, productError] = useFetch<Product>(`product/${params.id}`)
+    if (productError) {
+        navigate("/404", { replace: true });
+    }
+    if (!product) {
+        return "Loading ..."
+    }
     return (
         <div className="container mt-5">
             <Breadcrumb />
             <section className="mt-5 flex flex-col lg:flex-row items-start gap-4 child:rounded-lg child:bg-white child:dark:bg-gray-800 child:shadow child:p-4">
                 <div className="w-full lg:w-3/4">
                     <div className="flex flex-col md:flex-row justify-start gap-x-8 xl:gap-x-2 items-start">
-                        <SingleSlider />
+                        <SingleSlider image={product.image_url} />
                         <div className="w-full md:w-3/4 flex flex-col gap-y-7">
                             <div className="flex items-center justify-between">
                                 <a href="shop.html" className="font-DanaMedium text-sky-400">
-                                    اپل / گوشی موبایل اپل
+                                    {product.name}
                                 </a>
                                 <div className="hidden md:flex items-center gap-x-2">
                                     <div className="tooltip">
@@ -70,11 +83,9 @@ function Single() {
                                 </div>
                             </div>
                             <div className="flex flex-col gap-y-3">
-                                <p className="text-lg font-DanaDemiBold dark:text-gray-300">
-                                    گوشی موبایل اپل مدل iPhone 16 دو سیم کارت ظرفیت 128 گیگابایت و رم 8
-                                </p>
+                                <p className="text-lg font-DanaDemiBold dark:text-gray-300" dangerouslySetInnerHTML={{ __html: product.description || "" }}></p>
                                 <p className="text-sm text-gray-300 dark:text-gray-500">
-                                    Apple iPhone 16 CH Dual SIM Storage 128GB And RAM 8GB Mobile Phone
+                                    not implemented
                                 </p>
                                 <div className="flex items-center gap-x-2">
                                     <span className="flex items-center gap-x-1 text-sm">
@@ -175,7 +186,7 @@ function Single() {
                 <div className="w-full lg:w-1/4 lg:sticky top-5 flex flex-col gap-y-6">
                     {/* PRICE */}
                     <div className="flex items-center gap-x-1">
-                        <p className="text-2xl font-DanaDemiBold">۹۹,۸۹۹,۰۰۰</p>
+                        <p className="text-2xl font-DanaDemiBold">{product.price}</p>
                         <p className="">تومان</p>
                     </div>
                     <button className="w-full flex items-center justify-between gap-x-1 rounded-lg border border-gray-200 dark:border-white/20 py-2 px-3">
@@ -197,7 +208,7 @@ function Single() {
                     </button>
                     <button className="w-full flex items-center gap-x-1 justify-between dark:bg-gray-900 dark:text-gray-400  bg-gray-100 transition-all rounded-lg py-2 px-2 xl:px-3 font-DanaMedium text-sm xl:text-base">
                         <p>مجموع خرید :</p>
-                        <p>۹۹,۸۹۹,۰۰۰ تومان</p>
+                        <p>{product.price} تومان</p>
                     </button>
                     <div className="relative overflow-hidden text-sm font-DanaDemiBold text-right">
                         <div id="slider-text" className="transition-all duration-700 ease-in-out">
