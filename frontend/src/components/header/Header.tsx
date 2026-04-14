@@ -22,17 +22,14 @@ export default function Header() {
   const {cart} = useCart()
 
   const [navigation,navigationError] = useFetch<NavbarItem[]>("/navigation")
-  const [slidesRaw,slidesError] = useFetch<SliderItem[]>("/slides")
+  const [slides,slidesError] = useFetch<SliderItem[]>("/slides")
 
   if (navigationError){
     return "header not loaded"
-  }
-  if (!navigation) return null;
-  
+  }  
   if (slidesError){
     return "slides not loaded"
   }
-  const slides = slidesRaw ?? []
   return (
     <header className="header">
       <div className="container mt-5 hidden flex-col gap-y-6 lg:flex">
@@ -142,7 +139,7 @@ export default function Header() {
         <div className="relative flex-between h-16 bg-gray-900 dark:bg-gray-800 rounded-full text-gray-200 px-10">
           {/* MENU */}
           <ul className="flex items-center gap-x-8">
-            { navigation.map((navbar,idx)=>(
+            { navigation?.map((navbar,idx)=>(
               <li className="menu-item group" key={idx}> 
                 <Link to={navbar.link} className="menu-item_link cursor-pointer">
                   {navbar.name}
@@ -168,7 +165,7 @@ export default function Header() {
             }
           </ul>
         </div>
-      {showSlider && <ImageSlider slides={slides} />}
+      {showSlider && <ImageSlider slides={slides ?? []} />}
       </div>
     </header>
   )

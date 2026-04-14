@@ -1,8 +1,10 @@
 import { Link } from "react-router"
-import img1 from "../../assets/images/products/1.png"
-import img2 from "../../assets/images/products/2.png"
+import type {Product} from "./type"
 
-function ProductCard() {
+interface ProductCardProps{
+  product:Product
+}
+function ProductCard({product}:ProductCardProps) {
   return (
     <div className="product-card group">
       {/* product header */}
@@ -34,25 +36,25 @@ function ProductCard() {
           </div>
         </div>
         {/* badge offer */}
-        <span className="product-card_badge">70% تخفیف‌{/*س*/}</span>
+        <span className="product-card_badge">xxx% تخفیف‌{/*س*/}</span>
       </div>
       {/* product img */}
-      <Link to={`/single/1`}>
+      <Link to={`/single/${product.id}`}>
         <img
           className="product-card_img group-hover:opacity-0 absolute"
-          src={img1}
+          src={product.image_url?product.image_url:""}
           alt=""
         />
         <img
           className="product-card_img opacity-0 group-hover:opacity-100"
-          src={img2}
+          src={product.image_url?product.image_url:""}
           alt=""
         />
       </Link>
       {/*  product footer */}
       <div className="space-y-2">
         <Link to={`/single/1`} className="product-card_link">
-          لپ تاپ 15.6 اینچی ایسوس مدل Vivobook15 X515MA-BR001-Celeron N4020-8GB DDR4
+          {product.name}
         </Link>
         {/* Rate and Price */}
         <div className="product-card_price-wrapper">
@@ -74,9 +76,9 @@ function ProductCard() {
           {/* Price */}
           <div className="product-card_price">
             <del>
-              70,000,000 <h6>تومان</h6>
+              xxx<h6>تومان</h6>
             </del>
-            <p>70,000,000</p>
+            <p>{product.price}</p>
             <span>تومان</span>
           </div>
         </div>

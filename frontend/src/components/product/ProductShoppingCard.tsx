@@ -70,8 +70,8 @@ function ProductShoppingCard({cartItem}:ProductShoppingCartProps) {
                 </div>
             </div>
             <div className="hidden sm:flex items-end justify-between flex-col">
-                <svg className="w-5 h-5 cursor-pointer">
-                <use href="#x-mark" onClick={()=>removeItem(cartItem.id)} />
+                <svg className="w-5 h-5 cursor-pointer" onClick={()=>removeItem(cartItem.id)}>
+                <use href="#x-mark"/>
                 </svg>
                 <span className="absolute bottom-5 text-blue-500 hover:ml-2 duration-300 transition-all flex items-center gap-x-1 text-sm cursor-pointer">
                 <p className="hidden md:flex">افزودن به خرید بعدی</p>

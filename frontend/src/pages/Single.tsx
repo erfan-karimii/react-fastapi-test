@@ -15,8 +15,8 @@ import img4 from "../assets/images/products/14.webp"
 
 function Single() {
     const navigate = useNavigate();
-    const { addItem } = useCart();
     const params = useParams()
+    const { addItem } = useCart();
 
     const [product, productError] = useFetch<Product>(`product/${params.id}`)
     if (productError) {
