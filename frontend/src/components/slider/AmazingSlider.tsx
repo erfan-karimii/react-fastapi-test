@@ -76,8 +76,9 @@ function AmazingSlider() {
                             </svg>
                         </span>
                     </div>
-
-                    <img src={product.image_url} alt={product.name} className="w-48 h-28  rounded-lg" />
+                    <Link to={`/single/${product.id}`} className="w-36 block" style={{fontSize: 'smaller'}}>
+                        <img src={product.image_url} alt={product.name} className="w-48 h-28  rounded-lg" />
+                    </Link>
                     <div className="space-y-2">
                         <Link to={`/single/${product.id}`} className="w-36 block" style={{fontSize: 'smaller'}}>
                             {product.name}

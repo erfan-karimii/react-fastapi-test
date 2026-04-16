@@ -1,3 +1,4 @@
+import { Link } from "react-router"
 import { useCart, type CartItem } from "../../context/CartContext"
 
 interface ProductShoppingCartProps{
@@ -11,7 +12,9 @@ function ProductShoppingCard({cartItem}:ProductShoppingCartProps) {
             <div className="flex flex-col sm:flex-row items-center gap-6">
                 {/* IMG AND COUNT BTN */}
                 <div className="flex w-fit flex-col">
-                <img src={cartItem.image} className="w-36" alt="" />
+                <Link to={`/single/${cartItem.id}`}>
+                    <img src={cartItem.image} className="w-36" alt="" />
+                </Link>
                 <button className="flex items-center justify-between gap-x-1 rounded-lg border border-gray-200 dark:border-white/20 py-1 px-2">
                     <svg className="w-4 h-4 increment text-green-600">
                     <use href="#plus" />
