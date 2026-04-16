@@ -1,18 +1,19 @@
+import { Link } from "react-router"
 
 function Breadcrumb() {
   return (
         <nav className="flex mt-8 mr-2" aria-label="Breadcrumb">
             <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                 <li className="inline-flex items-center">
-                <a
-                    href="main.html"
+                <Link
+                    to="/"
                     className="inline-flex items-center text-sm gap-x-1  text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white"
                 >
                     <svg className="size-4 mb-0.5">
                     <use href="#home" />
                     </svg>
                     صفحه اصلی
-                </a>
+                </Link>
                 </li>
                 <li aria-current="page">
                 <div className="flex items-center">
