@@ -4,6 +4,7 @@ import { useFetch } from "../../hooks/useFetch.ts"
 
 import ImageSlider from "./ImageSlider";
 import { useCart } from "../../context/CartContext.tsx";
+import { useAuth } from "../../context/AuthContext.tsx";
 
 type NavbarItem = {
   name: string;
@@ -20,6 +21,7 @@ type SliderItem = {
 export default function Header() {
   const showSlider = useLocation().pathname === "/" ? true : false;
   const {cart} = useCart()
+  const { user } = useAuth()
 
   const [navigation,navigationError] = useFetch<NavbarItem[]>("/navigation")
   const [slides,slidesError] = useFetch<SliderItem[]>("/slides")
@@ -65,12 +67,21 @@ export default function Header() {
             </button>
             {/* Account Btn */}
             <button className="group relative flex-center py-2 px-4 app-border rounded-full app-hover delay-75">
-              <a href="dashboard.html" className="flex items-center gap-x-1">
+              {user?
+              <Link to="/" className="flex items-center gap-x-1">
                 <svg className="size-5">
                   <use href="#user" />
                 </svg>
                 <p>حساب کاربری</p>
-              </a>
+              </Link>
+              :
+              <Link to="/login" className="flex items-center gap-x-1">
+                <svg className="size-5">
+                  <use href="#user" />
+                </svg>
+                <p>ورود</p>
+              </Link>
+              }
               <div className="absolute dark:border-none border border-gray-100 w-52 p-2 bg-white text-gray-900 dark:text-gray-100 flex flex-col gap-y-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:top-12 transition-all delay-100 dark:bg-gray-700 top-20 rounded-lg text-base shadow child:transition-all duration-300 child:py-1.5 child:px-2 z-30 child:rounded-lg child:w-full">
                 <a
                   href="dashboard-orders.html"
