@@ -32,7 +32,7 @@ export default function Header() {
   }
   return (
     <header className="header">
-      <div className="container mt-5 hidden flex-col gap-y-6 lg:flex">
+      <div className="mb-6 hidden flex-col gap-y-6 lg:flex">
         {/* TOPBAR */}
         <div className="flex-between">
           {/* Search Box */}

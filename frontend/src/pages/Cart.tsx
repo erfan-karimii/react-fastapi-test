@@ -9,7 +9,7 @@ export default function Cart() {
         return "محصولی در سبد خرید یافت نشد"
     }
     return (
-        <div className="container mt-5">
+        <>
             <Breadcrumb />
             <section className="flex flex-col lg:flex-row justify-between items-start gap-4 child:rounded-lg child:bg-white child:dark:bg-gray-800 child:shadow child:p-4 mt-5">
                 <div className="w-full lg:w-3/4 flex flex-col gap-y-8 ">
@@ -68,6 +68,6 @@ export default function Cart() {
 
 
             </section>
-        </div>
+        </>
     )
 }

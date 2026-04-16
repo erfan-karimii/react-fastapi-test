@@ -12,7 +12,7 @@ function Shop() {
     return "undere construction"
   }
   return (
-    <div className="container mt-5">
+    <>
       <Breadcrumb />
       <div className="flex flex-col lg:flex-row gap-4 mt-5 mx-2 md:mx-0">
         <SideFilter />
@@ -27,7 +27,7 @@ function Shop() {
         </div>
       </div>
 
-    </div>
+    </>
   )
 }
 

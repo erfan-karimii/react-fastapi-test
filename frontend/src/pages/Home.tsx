@@ -8,9 +8,7 @@ import "swiper/css/navigation";
 export default function Index() {
   return (
     <>
-      <div className="container mt-5">
-        <AmazingSlider />
-      </div>
+      <AmazingSlider />
     </>
   )
 }

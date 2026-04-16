@@ -26,7 +26,7 @@ function Single() {
         return "Loading ..."
     }
     return (
-        <div className="container mt-5">
+        <>
             <Breadcrumb />
             <section className="mt-5 flex flex-col lg:flex-row items-start gap-4 child:rounded-lg child:bg-white child:dark:bg-gray-800 child:shadow child:p-4">
                 <div className="w-full lg:w-3/4">
@@ -239,7 +239,7 @@ function Single() {
                     </div>
                 </div>
             </section>
-        </div>
+        </>
     )
 }
 

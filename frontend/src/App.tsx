@@ -7,14 +7,14 @@ import { CartProvider } from "./context/CartContext";
 
 function App() {
   return (
-    <>
+    <div className="container mt-5">
       <CartProvider>
         <Header />
         <AllRouts/>
       </CartProvider>
       <Footer />
       <ScrollRestoration />
-    </>
+    </div>
   )
 }
 

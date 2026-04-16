@@ -7,7 +7,7 @@ import cert2 from "../../assets/images/footer/2.png"
 
 function Footer() {
   return (
-    <footer className="container my-12">
+    <footer className="my-12">
         <div className="relative w-full bg-gray-900 dark:bg-gray-800 text-white rounded-2xl p-4 lg:p-9 footer-container">
             <div className="top-section">
                 <div className="mini-about">
