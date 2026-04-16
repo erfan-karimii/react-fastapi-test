@@ -19,3 +19,14 @@ class Slide(BaseModel):
     id:int
     image: str
     title: str
+    
+class PhoneSchema(BaseModel):
+    phone: str
+
+class VerifySchema(BaseModel):
+    phone: str
+    code: str
+
+class TokenResp(BaseModel):
+    access_token: str
+    token_type: str = "bearer"

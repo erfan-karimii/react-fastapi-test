@@ -1,18 +1,25 @@
 from typing import List
 from contextlib import asynccontextmanager
 from time import sleep
+from datetime import datetime, timedelta
+import random
 from fastapi_swagger import patch_fastapi
-
 
 from fastapi import FastAPI , HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
-from schemas import NavItems, Product , Slide
+from schemas import NavItems, Product , Slide ,PhoneSchema,VerifySchema,TokenResp
 from utils import initial_db
+from sms import send_sms
+from auth import create_jwt
+from config import settings
 
 
 db = []
+USERS = []        # {id, phone, is_verified}
+OTPS = []         # {phone, code, expires_at}
+USER_ID_COUNTER = 1
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -84,3 +91,48 @@ async def get_product_list():
         },
     ]
     return slides
+
+@app.post("/auth/send_otp")
+async def send_otp(data: PhoneSchema):
+    global OTPS
+
+    code = f"{random.randint(100000, 999999)}"
+    expires_at = datetime.utcnow() + timedelta(minutes=settings.OTP_EXP_MINUTES)
+
+    OTPS.append({
+        "phone": data.phone,
+        "code": code,
+        "expires_at": expires_at,
+    })
+
+    await send_sms(data.phone, code)
+    return {"msg": "OTP sent"}
+
+@app.post("/auth/verify", response_model=TokenResp)
+async def verify_otp(data: VerifySchema):
+    global USERS, OTPS, USER_ID_COUNTER
+
+    # find OTP
+    otp = next((o for o in OTPS if o["phone"] == data.phone and o["code"] == data.code), None)
+
+    if not otp:
+        raise HTTPException(status_code=400, detail="Invalid code")
+
+    if otp["expires_at"] < datetime.utcnow():
+        raise HTTPException(status_code=400, detail="Expired code")
+
+    # find user
+    user = next((u for u in USERS if u["phone"] == data.phone), None)
+
+    if not user:
+        user = {
+            "id": USER_ID_COUNTER,
+            "phone": data.phone,
+            "is_verified": True,
+        }
+        USERS.append(user)
+        USER_ID_COUNTER += 1
+
+    # return JWT
+    token = create_jwt(user["id"])
+    return TokenResp(access_token=token)

@@ -26,7 +26,6 @@ function Shop() {
           <Pagination />
         </div>
       </div>
-
     </>
   )
 }
