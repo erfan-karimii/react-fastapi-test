@@ -4216,12 +4216,12 @@ img {
 
 .text-error {
   margin-top: 0.625rem;
-  display: none;
+  display: flex;
   font-size: 0.875rem;
   line-height: 1.25rem;
   --tw-text-opacity: 1;
   color: rgb(239 68 68 / var(--tw-text-opacity, 1));
-  opacity: 0;
+  opacity: 1;
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;

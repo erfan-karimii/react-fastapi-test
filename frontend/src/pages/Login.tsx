@@ -1,15 +1,25 @@
 import { useState } from "react";
 import { env } from "../config/env";
+import { useNavigate } from "react-router";
 
 export default function Login() {
+  const navigate = useNavigate() 
   const [phone, setPhone] = useState("");
+  const [error, setError] = useState("");
+  const iranPhoneRegex = /^09\d{9}$/;
 
   const sendOtp = async () => {
-    await fetch(`${env.apiBaseUrl}/auth/send_otp`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ phone }),
-    });
+    if (!iranPhoneRegex.test(phone)) {
+      setError("شماره موبایل معتبر نیست");
+    } else {
+      setError("");
+      await fetch(`${env.apiBaseUrl}/auth/send_otp`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phone }),
+      });
+      navigate(`/verify?phoneNumber=${phone}`,{replace:true})
+    }
   };
 
   return (
@@ -47,7 +57,7 @@ export default function Login() {
       </div>
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <p className="mb-2 text-gray-800 dark:text-gray-100 font-DanaMedium text-lg">ورود | ثبت‌نام </p>
-        <form className="space-y-5" action="/verify">
+        <form className="space-y-5" onSubmit={(e)=>e.preventDefault()}>
           <div>
             <label className="block text-sm/6 font-medium text-gray-500 dark:text-gray-300">لطفا شماره موبایل یا
               ایمیل خود را وارد کنید </label>
@@ -57,7 +67,9 @@ export default function Login() {
                 text-gray-800 dark:text-gray-100 dark:bg-gray-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded-md outline-none focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 dark:focus:ring-blue-400
                 "/>
             </div>
-            <p className="text-error"></p>
+            {error &&
+             <p className="text-error">{error}</p>
+            }
           </div>
           <div>
             <button type="submit" className="submit-btn" onClick={sendOtp}>تایید شماره تلفن</button>

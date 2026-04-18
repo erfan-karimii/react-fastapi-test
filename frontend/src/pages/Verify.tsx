@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { env } from "../config/env";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 export default function Verify() {
     const { setUser } = useAuth()
+    const navigate = useNavigate()
+    const [code, setCode] = useState("");
+    const [error,setError] = useState("");
     const [searchParams] = useSearchParams();
     const phone = searchParams.get("phoneNumber");
-    const [code, setCode] = useState("");
 
     const verify = async () => {
         const res = await fetch(`${env.apiBaseUrl}/auth/verify`, {
@@ -15,8 +17,14 @@ export default function Verify() {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ phone , code }),
         });
-        const data = await res.json();
-        setUser(data.access_token?data.access_token:"") 
+        if (res.ok){
+            const data = await res.json();
+            setUser(data.access_token?data.access_token:"")
+            navigate("/",{replace:true}) 
+        }else{
+            console.log(res.status)
+            setError("کد ارسالی صحیح نمی باشد")
+        }
     };
 
   return (
@@ -52,7 +60,7 @@ export default function Verify() {
         </a>
       </div>
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form className="space-y-5" action="/">
+        <form className="space-y-5" onSubmit={(e)=>e.preventDefault()}>
           <div>
             <label className="block text-sm/6 font-medium text-gray-500 dark:text-gray-300">لطفا 
               کد تایید خود را وارد کنید </label>
@@ -62,7 +70,9 @@ export default function Verify() {
                 text-gray-800 dark:text-gray-100 dark:bg-gray-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded-md outline-none focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 dark:focus:ring-blue-400
                 "/>
             </div>
-            <p className="text-error"></p>
+            {error &&
+             <p className="text-error">{error}</p>
+            }
           </div>
           <div>
             <button type="submit" onClick={verify} className="submit-btn">ورود</button>
