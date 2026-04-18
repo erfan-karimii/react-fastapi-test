@@ -135,6 +135,7 @@ export default function Header() {
               </svg>
             </button>
             {/* Shoping cart */}
+            <Link to="/cart">
             <button className="flex-center p-2 bg-blue-600 text-gray-100 rounded-full open-cart relative">
               <svg className="size-6">
                 <use href="#shopping-bag" />
@@ -148,6 +149,7 @@ export default function Header() {
                 }
               </span>
             </button>
+            </Link>
           </div>
         </div>
         {/* NAVBAR */}
