@@ -7,9 +7,9 @@ export default function AllRouts() {
   return (
     <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/verify" element={<Verify />} />
         <Route element={<Layout />} >
           <Route path="/" element={<Index />} />
-          <Route path="/verify" element={<Verify />} />
           <Route path="/about" element={<About />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/cart" element={<Cart />} />

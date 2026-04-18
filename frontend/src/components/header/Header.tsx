@@ -20,8 +20,9 @@ type SliderItem = {
 
 export default function Header() {
   const showSlider = useLocation().pathname === "/" ? true : false;
-  const {cart} = useCart()
-  const { user } = useAuth()
+  const { cart } = useCart()
+  const { user , setUser } = useAuth()
+  
 
   const [navigation,navigationError] = useFetch<NavbarItem[]>("/navigation")
   const [slides,slidesError] = useFetch<SliderItem[]>("/slides")
@@ -68,58 +69,61 @@ export default function Header() {
             {/* Account Btn */}
             <button className="group relative flex-center py-2 px-4 app-border rounded-full app-hover delay-75">
               {user?
-              <Link to="/" className="flex items-center gap-x-1">
-                <svg className="size-5">
-                  <use href="#user" />
-                </svg>
-                <p>حساب کاربری</p>
-              </Link>
-              :
-              <Link to="/login" className="flex items-center gap-x-1">
-                <svg className="size-5">
-                  <use href="#user" />
-                </svg>
-                <p>ورود</p>
-              </Link>
-              }
-              <div className="absolute dark:border-none border border-gray-100 w-52 p-2 bg-white text-gray-900 dark:text-gray-100 flex flex-col gap-y-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:top-12 transition-all delay-100 dark:bg-gray-700 top-20 rounded-lg text-base shadow child:transition-all duration-300 child:py-1.5 child:px-2 z-30 child:rounded-lg child:w-full">
-                <a
-                  href="dashboard-orders.html"
-                  className="flex items-center gap-x-2  hover:bg-blue-500 hover:text-gray-100"
-                >
-                  <svg className="h-5 w-5">
+                <Link to="/" className="flex items-center gap-x-1">
+                  <svg className="size-5">
                     <use href="#user" />
                   </svg>
-                  سفارشات من
-                </a>
-                <a
-                  href="dashboard-messages.html"
-                  className="flex items-center gap-x-2  hover:bg-blue-500 hover:text-gray-100"
-                >
-                  <svg className="h-5 w-5">
-                    <use href="#envelope" />
+                  <p>حساب کاربری</p>
+                </Link>
+                :
+                <Link to="/login" className="flex items-center gap-x-1">
+                  <svg className="size-5">
+                    <use href="#user" />
                   </svg>
-                  لیست پیام ها
-                </a>
-                <a
-                  href="dashboard-account.html"
-                  className="flex items-center gap-x-2  hover:bg-blue-500 hover:text-gray-100"
-                >
-                  <svg className="h-5 w-5">
-                    <use href="#cog" />
-                  </svg>
-                  اطلاعات کاربری
-                </a>
-                <a
-                  href="#"
-                  className="flex items-center gap-x-2  hover:bg-red-500 dark:hover:bg-red-500 hover:text-gray-100"
-                >
-                  <svg className="h-5 w-5">
-                    <use href="#arrow-left-end" />
-                  </svg>
-                  خروج از حساب
-                </a>
-              </div>
+                  <p>ورود</p>
+                </Link>
+              }
+              {user &&
+                <div className="absolute dark:border-none border border-gray-100 w-52 p-2 bg-white text-gray-900 dark:text-gray-100 flex flex-col gap-y-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:top-12 transition-all delay-100 dark:bg-gray-700 top-20 rounded-lg text-base shadow child:transition-all duration-300 child:py-1.5 child:px-2 z-30 child:rounded-lg child:w-full">
+                  <a
+                    href="#"
+                    className="flex items-center gap-x-2  hover:bg-blue-500 hover:text-gray-100"
+                  >
+                    <svg className="h-5 w-5">
+                      <use href="#user" />
+                    </svg>
+                    سفارشات من
+                  </a>
+                  <a
+                    href="#"
+                    className="flex items-center gap-x-2  hover:bg-blue-500 hover:text-gray-100"
+                  >
+                    <svg className="h-5 w-5">
+                      <use href="#envelope" />
+                    </svg>
+                    لیست پیام ها
+                  </a>
+                  <a
+                    href="#"
+                    className="flex items-center gap-x-2  hover:bg-blue-500 hover:text-gray-100"
+                  >
+                    <svg className="h-5 w-5">
+                      <use href="#cog" />
+                    </svg>
+                    اطلاعات کاربری
+                  </a>
+                  <a
+                    onClick={()=>setUser("")}
+                    href="#"
+                    className="flex items-center gap-x-2  hover:bg-red-500 dark:hover:bg-red-500 hover:text-gray-100"
+                  >
+                    <svg className="h-5 w-5">
+                      <use href="#arrow-left-end" />
+                    </svg>
+                    خروج از حساب
+                  </a>
+                </div>
+              }
             </button>
             {/* Toggle theme */}
             <button className="toggle-theme flex-center p-2 app-border rounded-full app-hover">

@@ -10,8 +10,9 @@ interface AuthContextProvider {
 export const AuthContext = createContext<null|AuthContextProvider>(null);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<string>("");
-
+  const [user, setUser] = useState(() => {
+    return localStorage.getItem("token") || "";
+  });
   useEffect(() => {
     localStorage.setItem("token", user);
   }, [user]);
