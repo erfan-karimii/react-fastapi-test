@@ -1,4 +1,10 @@
-function Sidebar() {
+import type {User} from "./typs"
+
+interface SidebarProps{
+    user: User|null
+}
+
+function Sidebar({user}:SidebarProps) {
   return (
         <div className="lg:sticky mb-8 top-1 h-fit lg:w-1/4 hidden lg:flex flex-col gap-y-4 items-center shadow rounded-lg p-4 dark:bg-gray-800 bg-white">
             <div className="w-full flex items-center justify-between border-b border-gray-200 dark:border-white/20 py-3">
@@ -7,7 +13,7 @@ function Sidebar() {
                         alt="AVATAR"/>
                     <span className="felx flex-col gap-y-2">
                         <p className="font-DanaMedium text-lg">پارسا وصالی</p>
-                        <p className="text-gray-400">09100000001</p>
+                        <p className="text-gray-400">{ user ? user.phone: "aaa" }</p>
                     </span>
                 </div>
                 <span>

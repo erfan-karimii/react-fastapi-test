@@ -6,8 +6,11 @@ type UseFetchReturn<T> = [
   data: T|null,
   error: boolean
 ]
+type Header = {
+  token?: string 
+}
 
-export function useFetch<T>(apiPath: string):UseFetchReturn<T>{
+export function useFetch<T>(apiPath: string,header: Header={}):UseFetchReturn<T>{
   const [data, setData] = useState<T|null>(null);
   const [error, setError] = useState<boolean>(false);
   const url = `${env.apiBaseUrl}${apiPath}`;
@@ -19,7 +22,7 @@ export function useFetch<T>(apiPath: string):UseFetchReturn<T>{
           {
             method: "GET",
             headers: {
-              "Accept": "application/json",
+              "Accept": "application/json", ...header
             }
           }
         );

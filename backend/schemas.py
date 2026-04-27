@@ -30,3 +30,6 @@ class VerifySchema(BaseModel):
 class TokenResp(BaseModel):
     access_token: str
     token_type: str = "bearer"
+
+class DashboardResp(BaseModel):
+    phone: str

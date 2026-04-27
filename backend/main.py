@@ -5,11 +5,11 @@ from datetime import datetime, timedelta
 import random
 from fastapi_swagger import patch_fastapi
 
-from fastapi import FastAPI , HTTPException
+from fastapi import FastAPI , HTTPException , Header
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
-from schemas import NavItems, Product , Slide ,PhoneSchema,VerifySchema,TokenResp
+from schemas import NavItems, Product , Slide ,PhoneSchema,VerifySchema,TokenResp,DashboardResp
 from utils import initial_db
 from sms import send_sms
 from auth import create_jwt
@@ -128,11 +128,20 @@ async def verify_otp(data: VerifySchema):
         user = {
             "id": USER_ID_COUNTER,
             "phone": data.phone,
+            "jwt": create_jwt(USER_ID_COUNTER),
             "is_verified": True,
         }
         USERS.append(user)
         USER_ID_COUNTER += 1
 
     # return JWT
-    token = create_jwt(user["id"])
-    return TokenResp(access_token=token)
+    return TokenResp(access_token=user['jwt'])
+
+
+@app.get("/user/dashboard",response_model=DashboardResp,responses={404:{"detail":"user not found"}})
+async def user_dashboard(token: str = Header(...)):
+    user = next((u for u in USERS if u["jwt"] == token), None)
+    if not user:
+        raise HTTPException(status_code=404, detail=f"user not found")
+    return {"phone":user['phone']}
+    

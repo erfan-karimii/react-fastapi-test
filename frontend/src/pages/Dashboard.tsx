@@ -1,12 +1,18 @@
 import Sidebar from "../components/dashboard/Sidebar"
+import type { User } from "../components/dashboard/typs"
+import { useAuth } from "../context/AuthContext"
 import { useFetch } from "../hooks/useFetch"
 
 function Dashboard() {
-    const [data,useData] = useFetch("/")
-    console.log(data,useData)
+    const {user} = useAuth()
+    const [data,error] = useFetch<User>("/user/dashboard",{"token":user})
+    console.log(data,error)
+    if (error){
+        return "somthing wrong please try again later"
+    }
     return (
         <div className="flex flex-col lg:flex-row gap-x-8 mt-10">
-            <Sidebar/>
+            <Sidebar user={data}/>
             <div className="lg:w-3/4 px-3 md:px-0">
                 <div className="flex lg:hidden">
                     <button className="open-user-menu bg-blue-500 flex items-center gap-x-1 font-DanaMedium text-white p-2 rounded-lg text-sm mr-2">
