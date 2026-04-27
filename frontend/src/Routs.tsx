@@ -1,5 +1,5 @@
 import { Routes, Route  } from "react-router-dom";
-import { Index, About, Shop, Cart, Single, Page404, Login, Verify } from "./pages/"
+import { Index, About, Shop, Cart, Single, Page404, Login, Verify , Dashboard } from "./pages/"
 import { Layout } from "./components/";
 
 
@@ -10,6 +10,7 @@ export default function AllRouts() {
         <Route path="/verify" element={<Verify />} />
         <Route element={<Layout />} >
           <Route path="/" element={<Index />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/about" element={<About />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/cart" element={<Cart />} />

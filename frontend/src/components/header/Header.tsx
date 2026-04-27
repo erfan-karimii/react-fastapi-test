@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import { useLocation } from "react-router-dom";
 import { useFetch } from "../../hooks/useFetch.ts"
+import { useNavigate } from "react-router";
 
 import ImageSlider from "./ImageSlider";
 import { useCart } from "../../context/CartContext.tsx";
@@ -22,6 +23,12 @@ export default function Header() {
   const showSlider = useLocation().pathname === "/" ? true : false;
   const { cart } = useCart()
   const { user , setUser } = useAuth()
+  const navigate = useNavigate() 
+  function logout(){
+    setUser("")
+    navigate("/",{replace:true})
+  }
+
   
 
   const [navigation,navigationError] = useFetch<NavbarItem[]>("/navigation")
@@ -69,7 +76,7 @@ export default function Header() {
             {/* Account Btn */}
             <button className="group relative flex-center py-2 px-4 app-border rounded-full app-hover delay-75">
               {user?
-                <Link to="/" className="flex items-center gap-x-1">
+                <Link to="/dashboard" className="flex items-center gap-x-1">
                   <svg className="size-5">
                     <use href="#user" />
                   </svg>
@@ -113,7 +120,7 @@ export default function Header() {
                     اطلاعات کاربری
                   </a>
                   <a
-                    onClick={()=>setUser("")}
+                    onClick={logout}
                     href="#"
                     className="flex items-center gap-x-2  hover:bg-red-500 dark:hover:bg-red-500 hover:text-gray-100"
                   >
